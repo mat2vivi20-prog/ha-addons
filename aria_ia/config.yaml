@@ -2,7 +2,7 @@ name: "ARIA — Assistante IA"
 description: "Assistante IA vocale en français pour Vitrolles. Contrôle vos appareils via Gemini 2.0 Flash ou Ollama."
 version: "3.0.0"
 slug: "aria_ia"
-url: "https://github.com/mat2vivi20/ha-addons"
+url: "https://github.com/mat2vivi20-prog/ha-addons"
 init: false
 arch:
   - amd64
