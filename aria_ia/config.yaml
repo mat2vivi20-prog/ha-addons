@@ -1,0 +1,38 @@
+name: "ARIA — Assistante IA"
+description: "Assistante IA vocale en français pour Vitrolles. Contrôle vos appareils via Gemini 2.0 Flash ou Ollama."
+version: "3.0.0"
+slug: "aria_ia"
+url: "https://github.com/mat2vivi20/ha-addons"
+init: false
+arch:
+  - amd64
+  - aarch64
+  - armv7
+
+ingress: true
+ingress_port: 3210
+ingress_stream: true
+
+homeassistant_api: true
+auth_api: true
+
+panel_icon: "mdi:robot-love"
+panel_title: "ARIA"
+
+map:
+  - share:rw
+  - config:ro
+
+options:
+  gemini_api_key: ""
+  ollama_url: "http://host.docker.internal:11434"
+  ollama_model: "qwen2.5:7b"
+  video_path: "/config/www/iamp4/ia.mp4"
+  log_level: "info"
+
+schema:
+  gemini_api_key: str
+  ollama_url: str
+  ollama_model: str
+  video_path: str
+  log_level: "trace|debug|info|notice|warning|error|fatal"

@@ -1,0 +1,10 @@
+{
+  "name": "aria-ia",
+  "version": "1.0.0",
+  "description": "ARIA — Assistante IA locale pour Home Assistant",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
+  }
+}

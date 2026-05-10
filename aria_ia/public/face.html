@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARIA</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a14;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    #wrap {
+      position: relative;
+      width: min(220px, 90vw);
+      height: min(220px, 90vw);
+    }
+    #ring {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 3px solid #333366;
+      animation: idle-ring 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes idle-ring {
+      0%,100% { box-shadow: 0 0 12px rgba(100,100,255,0.3); border-color: #333366; }
+      50%      { box-shadow: 0 0 25px rgba(130,100,255,0.6); border-color: #5555aa; }
+    }
+    #face {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #2a2a5a;
+      filter: brightness(0.92) saturate(1.1);
+    }
+    #label {
+      margin-top: 12px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 1em;
+      letter-spacing: 0.4em;
+      color: #7070cc;
+      text-shadow: 0 0 15px rgba(100,100,255,0.5);
+    }
+    #hint {
+      margin-top: 6px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 0.7em;
+      color: #404060;
+    }
+    body:hover #ring {
+      border-color: #8888ff;
+      box-shadow: 0 0 30px rgba(136,136,255,0.5);
+    }
+  </style>
+</head>
+<body onclick="window.open('http://localhost:3210','_blank')">
+  <div id="wrap">
+    <div id="ring"></div>
+    <video id="face" src="/ia-face.mp4" autoplay muted loop playsinline></video>
+  </div>
+  <div id="label">ARIA</div>
+  <div id="hint">Cliquer pour interagir</div>
+</body>
+</html>

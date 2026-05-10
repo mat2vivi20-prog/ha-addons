@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARIA — Assistante IA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Bannière d'alerte proactive -->
+    <div id="alert-banner" class="alert-banner hidden"></div>
+
+    <!-- Visage IA + badge alarme -->
+    <div id="face-wrap">
+      <div id="ring"></div>
+      <video id="ia-face" src="/ia-face.mp4" muted playsinline loop preload="auto"></video>
+      <div id="face-overlay"></div>
+      <div id="alarm-badge" class="alarm-badge" title="État alarme"></div>
+    </div>
+
+    <!-- Nom + état -->
+    <div id="header">
+      <div id="name">ARIA</div>
+      <div id="status">Connexion...</div>
+    </div>
+
+    <!-- Bulles de dialogue -->
+    <div id="chat">
+      <div id="user-bubble" class="bubble user hidden"></div>
+      <div id="aria-bubble" class="bubble aria hidden"></div>
+    </div>
+
+    <!-- Indicateur actions HA -->
+    <div id="ha-actions"></div>
+
+    <!-- Boutons -->
+    <div id="controls">
+      <button id="auto-btn"    onclick="toggleAuto()"  title="Auto-écoute (A)">👂</button>
+      <button id="mic-btn"     onclick="toggleMic()"   title="Parler (Espace)">
+        <span id="mic-icon">🎤</span>
+      </button>
+      <button id="reset-btn"   onclick="resetConv()"   title="Réinitialiser (R)">🔄</button>
+      <button id="refresh-btn" onclick="refreshData()" title="Actualiser les données (F)">📡</button>
+    </div>
+
+    <!-- Champ texte -->
+    <div id="text-input-wrap">
+      <input type="text" id="text-input" placeholder="Tapez votre message ou commande…" autocomplete="off">
+      <button id="send-btn" onclick="sendText()">➤</button>
+    </div>
+
+    <div id="mic-hint">Espace = micro &nbsp;·&nbsp; A = auto &nbsp;·&nbsp; R = reset &nbsp;·&nbsp; F = actualiser</div>
+
+    <!-- Transcription live -->
+    <div id="transcript"></div>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
