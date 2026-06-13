@@ -1,0 +1,101 @@
+# packages/aria_annonces_plus.yaml — Catégories d'annonces supplémentaires
+
+input_boolean:
+  aria_annonce_presence:
+    name: "ARIA annonce présence"
+    icon: mdi:account-check
+  aria_annonce_cameras:
+    name: "ARIA annonce caméras"
+    icon: mdi:cctv
+  aria_annonce_interphone:
+    name: "ARIA annonce interphone"
+    icon: mdi:doorbell
+  aria_annonce_agenda:
+    name: "ARIA annonce agenda"
+    icon: mdi:calendar-clock
+  aria_annonce_meteo:
+    name: "ARIA annonce météo"
+    icon: mdi:weather-lightning-rainy
+  aria_annonce_energie:
+    name: "ARIA annonce énergie"
+    icon: mdi:lightning-bolt
+
+automation:
+  - alias: "ARIA présence arrivée"
+    id: aria_annonce_presence_arrive
+    trigger:
+      - platform: state
+        entity_id:
+          - person.mat2viv
+          - person.vichara
+        to: "home"
+    condition:
+      - condition: state
+        entity_id: input_boolean.aria_annonce_presence
+        state: "on"
+      - condition: time
+        after: "07:00:00"
+        before: "23:00:00"
+    action:
+      - variables:
+          noms:
+            person.mat2viv: "Matthias"
+            person.vichara: "Vichara"
+      - service: script.aria_parler
+        data:
+          message: "{{ noms[trigger.entity_id] }} vient d'arriver à la maison."
+    mode: single
+
+  - alias: "ARIA présence départ"
+    id: aria_annonce_presence_depart
+    trigger:
+      - platform: state
+        entity_id:
+          - person.mat2viv
+          - person.vichara
+        from: "home"
+        to: "not_home"
+    condition:
+      - condition: state
+        entity_id: input_boolean.aria_annonce_presence
+        state: "on"
+      - condition: time
+        after: "07:00:00"
+        before: "23:00:00"
+    action:
+      - variables:
+          noms:
+            person.mat2viv: "Matthias"
+            person.vichara: "Vichara"
+      - service: script.aria_parler
+        data:
+          message: "{{ noms[trigger.entity_id] }} vient de partir."
+    mode: single
+
+  - alias: "ARIA activer matin (plus)"
+    id: aria_annonces_plus_activer_matin
+    trigger:
+      - platform: time
+        at: "07:00:00"
+    action:
+      - service: input_boolean.turn_on
+        target:
+          entity_id:
+            - input_boolean.aria_annonce_presence
+            - input_boolean.aria_annonce_cameras
+            - input_boolean.aria_annonce_interphone
+            - input_boolean.aria_annonce_meteo
+
+  - alias: "ARIA désactiver nuit (plus)"
+    id: aria_annonces_plus_desactiver_nuit
+    trigger:
+      - platform: time
+        at: "22:30:00"
+    action:
+      - service: input_boolean.turn_off
+        target:
+          entity_id:
+            - input_boolean.aria_annonce_presence
+            - input_boolean.aria_annonce_cameras
+            - input_boolean.aria_annonce_interphone
+            - input_boolean.aria_annonce_meteo
